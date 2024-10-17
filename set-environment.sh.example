@@ -1,0 +1,38 @@
+export PREFIX=key
+export PROJECT=your-project-name
+
+export REGION=us-east5
+export ZONE=us-east5-a
+export CLUSTER=yourname-xpk-maxtext-demo
+export RESERVATION_ID=cloudtpu-123
+export TPU_TYPE=v5p-8 
+
+gcloud config set project $PROJECT
+gcloud config set compute/zone $ZONE
+gcloud config set compute/region $REGION
+
+### INTERNAL VARIABLES:
+export NETWORK_NAME=${PREFIX}-privatenetwork
+export SUBNET_NAME=${PREFIX}-privatesubnet
+export FIREWALL_RULE_NAME=${PREFIX}-privatefirewall
+export ROUTER_NAME=${PREFIX}-network
+export NAT_CONFIG=${PREFIX}-natconfig
+export NUMSLICES=1
+
+
+export CLUSTER_ARGUMENTS=" \
+ --network=${NETWORK_NAME} \
+ --subnetwork=${SUBNET_NAME} \
+ --scopes=cloud-platform \
+ --enable-ip-alias \
+ --enable-private-nodes \
+ --cluster-ipv4-cidr=10.224.0.0/12 \
+ --no-enable-master-authorized-networks \
+ --release-channel=\"None\" \
+"
+
+export TPU_NODEPOOL_ARGUMENTS=" \
+ --scopes=cloud-platform \
+ --enable-gvnic \
+ --max-pods-per-node 15 \
+"
