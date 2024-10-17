@@ -5,7 +5,7 @@ TS=`date +'%s' | cut -c4-`
 python3 ../xpk/xpk.py workload create \
 --cluster "${CLUSTER}" \
 --base-docker-image maxtext_base_image \
---workload "kyle-llama-70b-working-${TS}" \
+--workload "kyle-llama-70b-broken-${TS}" \
 --tpu-type="${TPU_TYPE}"    \
 --num-slices=1 \
 --command "python3 MaxText/train.py \
